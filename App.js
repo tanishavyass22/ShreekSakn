@@ -239,145 +239,228 @@
 // });
 // export default App;
 
+// import React, { useState } from "react";
+// import { View, Text, ActivityIndicator, FlatList, StyleSheet, Button } from "react-native";
+// import { MyFetchGetRequest, MyFetchPostRequest, MyFetchPutRequest, MyFetchPatchRequest, MyFetchDeleteRequest } from "./MyFetchApiRequests";
 
+// const App = () => {
+//   const [data, setData] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [message, setMessage] = useState("");
 
-import React, { useState } from "react";
-import { View, Text, ActivityIndicator, FlatList, StyleSheet, Button } from "react-native";
-import { MyFetchGetRequest, MyFetchPostRequest, MyFetchPutRequest, MyFetchPatchRequest, MyFetchDeleteRequest } from "./MyFetchApiRequests";
+//   const getData = async () => {
+//     setLoading(true);
+//     try {
+//       const res = await MyFetchGetRequest();
+//       console.log("data", res)
+//       setData(res);
+//       setMessage("Fetched Data Successfully");
+//     } catch (error) {
+//       setMessage("Error Fetching Data");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const postData = async () => {
+//     setLoading(true);
+//     try {
+//       const res = await MyFetchPostRequest({
+//         title: "hello",
+//         body: "world",
+//         userId: 2,
+//       });
+//       setMessage(`Posted Data: ${JSON.stringify(res)}`);
+//     } catch (error) {
+//       setMessage("Error Posting Data");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const putData = async () => {
+//     setLoading(true);
+//     try {
+//       const res = await MyFetchPutRequest(1, {
+//         title: "Updated Title",
+//         body: "Updated Body",
+//         userId: 1,
+//       });
+//       setMessage(`Put Data: ${JSON.stringify(res)}`);
+//     } catch (error) {
+//       setMessage("Error Updating Data");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const patchData = async () => {
+//     setLoading(true);
+//     try {
+//       const res = await MyFetchPatchRequest(1, { title: "Patched Title", userId: 1 });
+//       setMessage(`Patched Data: ${JSON.stringify(res)}`);
+//     } catch (error) {
+//       setMessage("Error Patching Data");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const deleteData = async () => {
+//     setLoading(true);
+//     try {
+//       const res = await MyFetchDeleteRequest(1);
+//       setMessage(`Deleted Data Response: ${JSON.stringify(res)}`);
+//     } catch (error) {
+//       setMessage("Error Deleting Data");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <View style={styles.container}>
+//       <Text style={styles.heading}>Fetch API Example</Text>
+//       <Button title="Get Data" onPress={getData} />
+//       <Button title="Post Data" onPress={postData} />
+//       <Button title="Put Data" onPress={putData} />
+//       <Button title="Patch Data" onPress={patchData} />
+//       <Button title="Delete Data" onPress={deleteData} />
+//       {loading && <ActivityIndicator size="large" color="blue" />}
+//       {message ? <Text style={styles.message}>{message}</Text> : null}
+//       <FlatList data={data}
+//         keyExtractor={(item) => item.id.toString()}
+//         renderItem={({ item }) => (
+//           <View style={styles.itemContainer}>
+//             <Text style={styles.title}>{item.title}</Text>
+//             <Text style={styles.body}>{item.body}</Text>
+//           </View>
+//         )}
+//       />
+//     </View>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     padding: 20,
+//     backgroundColor: "#f8f8f8",
+//   },
+//   heading: {
+//     fontSize: 20,
+//     fontWeight: "bold",
+//     marginBottom: 10,
+//     textAlign: "center",
+//   },
+//   message: {
+//     fontSize: 16,
+//     color: "green",
+//     marginVertical: 10,
+//     textAlign: "center",
+//   },
+//   itemContainer: {
+//     backgroundColor: "#fff",
+//     padding: 10,
+//     marginBottom: 10,
+//     borderRadius: 5,
+//     elevation: 2,
+//   },
+//   title: {
+//     fontSize: 16,
+//     fontWeight: "bold",
+//     color: "#333",
+//   },
+//   body: {
+//     fontSize: 14,
+//     color: "#555",
+//     marginTop: 5,
+//   },
+// });
+// export default App;
+
+//AXIOS API
+import React, { useEffect } from "react";
+import { View, Text } from "react-native";
+import { MyAxiosGetRequest, MyAxiosPostRequest, MyAxiosPutRequest, MyAxiosPatchRequest, MyAxiosDeleteRequest } from "./MyAxiosApiRequests";
+
 
 const App = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  useEffect(()=>{
+    //getData();
+    //postData();
+    //putData();
+    //patchData()
+    DeleteData();
+  }, []);
 
-  const getData = async () => {
-    setLoading(true);
+  const DeleteData = async () => {
     try {
-      const res = await MyFetchGetRequest();
-      console.log("data", res)
-      setData(res);
-      setMessage("Fetched Data Successfully");
+      const res = await MyAxiosDeleteRequest(10);
+      //console.log(res);
+      console.log("Response Data:", res.data); 
+      console.log("Response Status:", res.status);  
     } catch (error) {
-      setMessage("Error Fetching Data");
-    } finally {
-      setLoading(false);
+      console.log("Error fetching data:", error);
     }
   };
-
-  const postData = async () => {
-    setLoading(true);
-    try {
-      const res = await MyFetchPostRequest({
-        title: "hello",
-        body: "world",
-        userId: 2,
-      });
-      setMessage(`Posted Data: ${JSON.stringify(res)}`);
-    } catch (error) {
-      setMessage("Error Posting Data");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const putData = async () => {
-    setLoading(true);
-    try {
-      const res = await MyFetchPutRequest(1, {
-        title: "Updated Title",
-        body: "Updated Body",
-        userId: 1,
-      });
-      setMessage(`Put Data: ${JSON.stringify(res)}`);
-    } catch (error) {
-      setMessage("Error Updating Data");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const patchData = async () => {
-    setLoading(true);
-    try {
-      const res = await MyFetchPatchRequest(1, { title: "Patched Title", userId: 1 });
-      setMessage(`Patched Data: ${JSON.stringify(res)}`);
-    } catch (error) {
-      setMessage("Error Patching Data");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const deleteData = async () => {
-    setLoading(true);
-    try {
-      const res = await MyFetchDeleteRequest(1);
-      setMessage(`Deleted Data Response: ${JSON.stringify(res)}`);
-    } catch (error) {
-      setMessage("Error Deleting Data");
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const patchData = async () => {
+  //   try {
+  //     const res = await MyAxiosPatchRequest(10,{
+  //       title:"hello",
+  //       //body:"world",
+  //       //id:105
+  //     });
+  //     //console.log(res);
+  //     console.log(res.data); 
+  //     console.log(res.status) 
+  //   } catch (error) {
+  //     console.log("Error fetching data:", error);
+  //   }
+  // };
+  // const putData = async () => {
+  //   try {
+  //     const res = await MyAxiosPutRequest(10,{
+  //       title:"hello",
+  //       //body:"world",
+  //       //id:105
+  //     });
+  //     //console.log(res);
+  //     console.log(res.data); 
+  //     console.log(res.status) 
+  //   } catch (error) {
+  //     console.log("Error fetching data:", error);
+  //   }
+  // };
+  // const postData = async () => {
+  //   try {
+  //     const res = await MyAxiosPostRequest({
+  //       title:"hello",
+  //       body:"world",
+  //       id:101
+  //     });
+  //     //console.log(res);
+  //     console.log(res.data); 
+  //     console.log(res.status) 
+  //   } catch (error) {
+  //     console.log("Error fetching data:", error);
+  //   }
+  // };
+  // const getData = async () => {
+  //   try {
+  //     const res = await MyAxiosGetRequest();
+  //     //console.log(res);
+  //     console.log(res.data);  
+  //   } catch (error) {
+  //     console.log("Error fetching data:", error);
+  //   }
+  // };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Fetch API Example</Text>
-      <Button title="Get Data" onPress={getData} />
-      <Button title="Post Data" onPress={postData} />
-      <Button title="Put Data" onPress={putData} />
-      <Button title="Patch Data" onPress={patchData} />
-      <Button title="Delete Data" onPress={deleteData} />
-      {loading && <ActivityIndicator size="large" color="blue" />}
-      {message ? <Text style={styles.message}>{message}</Text> : null}
-      <FlatList data={data}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.body}>{item.body}</Text>
-          </View>
-        )}
-      />
+    <View>
+      <Text>Axios API Example</Text>
+      
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#f8f8f8",
-  },
-  heading: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
-    textAlign: "center",
-  },
-  message: {
-    fontSize: 16,
-    color: "green",
-    marginVertical: 10,
-    textAlign: "center",
-  },
-  itemContainer: {
-    backgroundColor: "#fff",
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 5,
-    elevation: 2,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#333",
-  },
-  body: {
-    fontSize: 14,
-    color: "#555",
-    marginTop: 5,
-  },
-});
-
 export default App;
