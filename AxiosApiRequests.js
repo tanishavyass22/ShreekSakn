@@ -13,7 +13,7 @@ export const MyAxiosPostRequest = async data => {
     url: 'https://jsonplaceholder.typicode.com/posts',
     data: data,
   });
-  return res;
+  return res
 };
 
 export const MyAxiosPutRequest = async (id, data) => {
@@ -28,7 +28,8 @@ export const MyAxiosPatchRequest = async (id, data) => {
   const res = await axios({
     method: 'patch',
     url: 'https://jsonplaceholder.typicode.com/posts/' + id,
-    data: data,
+    data:data
+
   });
   return res;
 };

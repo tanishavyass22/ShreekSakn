@@ -139,8 +139,8 @@
 // import { View, Text, ActivityIndicator, FlatList, StyleSheet } from "react-native";
 // import { MyFetchGetRequest, MyFetchPostRequest , MyFetchPutRequest, MyFetchPatchRequest, MyFetchDeleteRequest} from "./MyFetchApiRequests";
 // const App = () => {
-//   //const [data, setData] = useState([]);  
-//   //const [loading, setLoading] = useState(true); 
+//   //const [data, setData] = useState([]);
+//   //const [loading, setLoading] = useState(true);
 
 //   useEffect(() => {
 //     //getData();
@@ -184,11 +184,11 @@
 //   // const getData = async () => {
 //   //   try {
 //   //     const res = await MyFetchGetRequest();
-//   //     setData(res); 
+//   //     setData(res);
 //   //   } catch (error) {
 //   //     console.error("Error fetching data:", error);
 //   //   } finally {
-//   //     setLoading(false); 
+//   //     setLoading(false);
 //   //   }
 //   // };
 //   return (
@@ -201,7 +201,7 @@
 //     //   ) : (
 //     //     <FlatList
 //     //       data={data}
-//     //       keyExtractor={(item) => item.id.toString()} 
+//     //       keyExtractor={(item) => item.id.toString()}
 //     //       renderItem={({ item }) => (
 //     //         <View style={styles.itemContainer}>
 //     //           <Text style={styles.title}>{item.title}</Text>
@@ -380,28 +380,32 @@
 // export default App;
 
 //AXIOS API
-import React, { useEffect } from "react";
-import { View, Text } from "react-native";
-import { MyAxiosGetRequest, MyAxiosPostRequest, MyAxiosPutRequest, MyAxiosPatchRequest, MyAxiosDeleteRequest } from "./MyAxiosApiRequests";
-
+import React, {useEffect} from 'react';
+import {View, Text} from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
+import {MyAxiosGetRequest, MyAxiosPostRequest, MyAxiosPutRequest, MyAxiosPatchRequest, MyAxiosDeleteRequest} from './AxiosApiRequests';
 
 const App = () => {
-  useEffect(()=>{
+
+  useEffect(() => {
     //getData();
     //postData();
     //putData();
     //patchData()
     DeleteData();
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1500);
   }, []);
 
   const DeleteData = async () => {
     try {
       const res = await MyAxiosDeleteRequest(10);
       //console.log(res);
-      console.log("Response Data:", res.data); 
-      console.log("Response Status:", res.status);  
+      console.log('Response data: ', res.data)
+      console.log('Response status: ', res.status)
     } catch (error) {
-      console.log("Error fetching data:", error);
+      console.log('Error fetching data: ', error)
     }
   };
   // const patchData = async () => {
@@ -412,8 +416,8 @@ const App = () => {
   //       //id:105
   //     });
   //     //console.log(res);
-  //     console.log(res.data); 
-  //     console.log(res.status) 
+  //     console.log(res.data);
+  //     console.log(res.status)
   //   } catch (error) {
   //     console.log("Error fetching data:", error);
   //   }
@@ -426,8 +430,8 @@ const App = () => {
   //       //id:105
   //     });
   //     //console.log(res);
-  //     console.log(res.data); 
-  //     console.log(res.status) 
+  //     console.log(res.data);
+  //     console.log(res.status)
   //   } catch (error) {
   //     console.log("Error fetching data:", error);
   //   }
@@ -440,8 +444,8 @@ const App = () => {
   //       id:101
   //     });
   //     //console.log(res);
-  //     console.log(res.data); 
-  //     console.log(res.status) 
+  //     console.log(res.data);
+  //     console.log(res.status)
   //   } catch (error) {
   //     console.log("Error fetching data:", error);
   //   }
@@ -450,7 +454,7 @@ const App = () => {
   //   try {
   //     const res = await MyAxiosGetRequest();
   //     //console.log(res);
-  //     console.log(res.data);  
+  //     console.log(res.data);
   //   } catch (error) {
   //     console.log("Error fetching data:", error);
   //   }
@@ -458,9 +462,8 @@ const App = () => {
 
   return (
     <View>
-      <Text>Axios API Example</Text>
-      
+      <Text>AXIOS API EXAMPLE</Text>
     </View>
   );
 };
-export default App;
+export default App
